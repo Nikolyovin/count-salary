@@ -1,5 +1,6 @@
 import { Button, Modal, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const ModalAdd = () => {
     const onChangeInputDate = () => {
@@ -10,12 +11,14 @@ const ModalAdd = () => {
         console.log('onChangeInputAmount:', onChangeInputAmount)
     }
 
+    const isModal = useSelector(state => state.app.isModal)
+
     return (
         <Modal 
             style = { styles.modal }
-            animationType="slide"
-            transparent={true}
-            visible {}
+            animationType = "slide"
+            transparent = { true }
+            visible = { isModal }
         >
             <Button />
             <View style = { styles.date }>
