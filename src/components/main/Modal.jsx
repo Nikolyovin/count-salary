@@ -11,7 +11,12 @@ const ModalAdd = () => {
     }
 
     return (
-        <Modal style = { styles.modal }>
+        <Modal 
+            style = { styles.modal }
+            animationType="slide"
+            transparent={true}
+            visible {}
+        >
             <Button />
             <View style = { styles.date }>
                 <Text style = { styles.dateText }>Дата :</Text>
