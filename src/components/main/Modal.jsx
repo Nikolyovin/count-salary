@@ -1,7 +1,7 @@
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Button, Modal, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 
-const Form = () => {
+const ModalAdd = () => {
     const onChangeInputDate = () => {
         console.log('onChangeInputDate:', onChangeInputDate)
     }
@@ -11,7 +11,7 @@ const Form = () => {
     }
 
     return (
-        <View style = { styles.form }>
+        <Modal style = { styles.modal }>
             <Button />
             <View style = { styles.date }>
                 <Text style = { styles.dateText }>Дата :</Text>
@@ -34,14 +34,14 @@ const Form = () => {
                     keyboardType="numeric"
                 />
             </View>
-        </View>
+        </Modal>
     )
 }
 
-export default Form
+export default ModalAdd
 
 const styles = StyleSheet.create({
-    form: {
+    modal: {
 
     }
 })
