@@ -1,12 +1,15 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import ModalAdd from './ModalAdd'
+import ModalAdd from './Modal'
+import Cards from './Cards'
+
 
 const Main = () => {
     return (
         <View>
-            <Text>Main</Text>
-            <ModalAdd/>
+            <Cards/>
+            <View><ModalAdd/></View>
+            
         </View>
     )
 }

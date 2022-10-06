@@ -2,6 +2,32 @@ const IS_SHOW_MODAL = "IS_SHOW_MODAL"
 
 const initialState = {
     isModal: false,
+    salary: [
+        {
+            year: '2023',
+            month: 'april',
+            payments: [
+                { 
+                    name: 'Змея',
+                    date: '04.05.2023',
+                    sum: 15000,
+                    id: Date.now().toString()
+                },
+                { 
+                    name: 'Пион',
+                    date: '06.05.2023',
+                    sum: 5000,
+                    id: Date.now().toString()
+                },
+                { 
+                    name: 'Котик',
+                    date: '10.05.2023',
+                    sum: 10000,
+                    id: Date.now().toString()
+                },
+            ]
+        }
+    ]
 }
 
 const appReducer = (state = initialState, action) => {
