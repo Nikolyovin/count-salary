@@ -1,6 +1,6 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, FlatList, Text, View } from 'react-native'
 import React from 'react'
-import ModalAdd from './Modal'
+import ModalAdd from './ModalAdd'
 import Cards from './Cards'
 
 
@@ -16,4 +16,6 @@ const Main = () => {
 
 export default Main
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    
+})

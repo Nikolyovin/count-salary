@@ -44,7 +44,7 @@ const appReducer = (state = initialState, action) => {
     }
 }
 
-export const isShowModal = (isModal) => ({ type: SET_TASKS, isModal })
+export const isShowModal = (isModal) => ({ type: IS_SHOW_MODAL, isModal })
 
 export const requestTasks = () => async (dispatch) => {
     try {

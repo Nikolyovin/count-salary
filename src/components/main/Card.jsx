@@ -2,6 +2,8 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
 const Card = () => {
+    const onPressDelete = () => console.log('delete');
+
     return (
         <View style = { styles.cardWrap }>
             <Text style = { styles.name }>Пион</Text>
@@ -21,18 +23,29 @@ export default Card
 
 const styles = StyleSheet.create({
     cardWrap: {
-
-    },
+        borderColor: 'black', 
+        borderWidth: 1,
+        marginTop: 5,
+        // alignItems:'center',
+        width:'80%'
+      },
+      textNameWrap: {
+        alignItems:'center',
+        
+      },
     name: {
 
     },
     date: {
 
     },
+    sum: {
+        
+    },
     buttonDelete: {
 
     },
     buttonDeleteIcon: {
-        
+
     }
 })

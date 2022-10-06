@@ -1,4 +1,4 @@
-import { Image, Modal, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Image, Modal, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isShowModal } from '../../redux/app-reducer'
