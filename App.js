@@ -10,10 +10,12 @@ export default function App() {
   return (
     <Provider store={store}>
       <View style={styles.container}>
-        <Header/>
-        <Main/>
-        <Footer/>
-        <StatusBar style="auto" />
+        <View style={styles.mainFooter}>
+          <StatusBar style="auto" />
+          <Header />
+          <Main />
+        </View>
+      <Footer />
       </View>
     </Provider>
   )
@@ -21,12 +23,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     paddingTop: 30,
-
     height: '100%',
-    // backgroundColor: 'green'
-    // justifyContent: 'space-around'
   },
   mainFooter: {
     flex: 1
