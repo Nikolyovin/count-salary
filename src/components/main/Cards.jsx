@@ -7,12 +7,20 @@ const Cards = () => {
   const payments = useSelector(state => state.app.salary[0].payments)
     console.log('payments:', payments);
   return (
-    <FlatList  
-      style = { styles.cardsWrap }                                 //FlatList нужен для скролла и заменят map 
-      keyExtractor = { item => item.id }                  
-      data={payments}
-      renderItem={ ({item}) => <Card props = {item}/> }
-    />
+    <View  style = { styles.cardsWrap }>
+      <FlatList  //FlatList нужен для скролла и заменят map 
+        style = { styles.cardsList }                                 
+        keyExtractor = { item => item.id }                  
+        data={payments}
+        renderItem={ ({item}) => 
+        <Card 
+          name = {item.name}
+          id = {item.id}
+          date = {item.date}
+          sum = {item.sum}
+        /> }
+      />
+    </View>
   )
 }
 
@@ -20,7 +28,11 @@ export default Cards
 
 const styles = StyleSheet.create({
   cardsWrap: {
-    alignItems: 'center',
-    width: '100%'
+    // alignItems: 'center',
+    // width: '100%'
+  },
+  cardsList: {
+    // alignItems: 'center',
+    
   }
 })

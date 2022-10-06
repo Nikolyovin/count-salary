@@ -7,23 +7,23 @@ const initialState = {
             year: '2023',
             month: 'april',
             payments: [
-                { 
+                {
                     name: 'Змея',
                     date: '04.05.2023',
                     sum: 15000,
-                    id: Date.now().toString()
+                    id: '1'
                 },
-                { 
+                {
                     name: 'Пион',
                     date: '06.05.2023',
                     sum: 5000,
-                    id: Date.now().toString()
+                    id: '2'
                 },
-                { 
+                {
                     name: 'Котик',
                     date: '10.05.2023',
                     sum: 10000,
-                    id: Date.now().toString()
+                    id: '3'
                 },
             ]
         }
@@ -31,14 +31,14 @@ const initialState = {
 }
 
 const appReducer = (state = initialState, action) => {
-    
+
     switch (action.type) {
         case IS_SHOW_MODAL:
             return {
                 ...state,
                 isModal: action.isModal
             }
-        
+
         default:
             return state
     }
