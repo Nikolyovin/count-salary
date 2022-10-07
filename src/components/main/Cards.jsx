@@ -4,7 +4,7 @@ import Card from './Card.jsx'
 import { useSelector } from 'react-redux'
 
 const Cards = () => {
-  const payments = useSelector(state => state.app.salary[0].payments)
+  const payments = useSelector(state => state.app.payments)
     console.log('payments:', payments);
   return (
     <View  style = { styles.cardsWrap }>

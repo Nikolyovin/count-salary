@@ -1,8 +1,11 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { removePayment } from '../../redux/app-reducer'
 
 const Card = ({date, id, name, sum}) => {
-    const onPressDelete = () => console.log('delete');
+    const dispatch = useDispatch()
+    const onPressDelete = () => dispatch(removePayment(id))
     // console.log('date:', date);
     // console.log('props::', props);
     return (

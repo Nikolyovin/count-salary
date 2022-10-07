@@ -2,6 +2,7 @@ import { Image, Modal, StyleSheet, Text, TextInput, View, TouchableOpacity } fro
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isShowModal } from '../../redux/app-reducer'
+import ModalAddInputs from './ModalAddInputs';
 
 const ModalAdd = () => {
     const dispatch = useDispatch()
@@ -19,85 +20,22 @@ const ModalAdd = () => {
     const onPressClose = () => dispatch(isShowModal(false))
 
     const isModal = useSelector(state => state.app.isModal)
-
-//     return (
-//         <View style = { styles.centeredView }>
-//             <Modal 
-//                 style = { styles.modal }
-//                 animationType = "slide"
-//                 transparent = { true }
-//                 visible = { isModal }
-//             >
-//                 <TouchableOpacity style = { styles.buttonClose } onPress = {onPressClose} >
-//                     <Text>X</Text>
-//                 </TouchableOpacity>
-//                 <View style = { styles.date }>
-//                     <Text style = { styles.dateText }>Дата :</Text>
-//                     <TextInput
-//                         style={styles.dateInput}
-//                         onChangeText={onChangeInputDate}
-//                         // value={number}
-//                         placeholder="24.01.2020"
-//                         keyboardType="numeric"
-//                     />
-//                 </View>
-
-//                 <View style = { styles.amount }>
-//                     <Text style = { styles.amountText }>Сумма :</Text>
-//                     <TextInput
-//                         style={styles.amountInput}
-//                         onChangeText={onChangeInputAmount}
-//                         // value={number}
-//                         placeholder="10000"
-//                         keyboardType="numeric"
-//                     />
-//                 </View>
-//                 <TouchableOpacity style = { styles.buttonAdd } onPress = {onPressAdd} >
-//                     <Text>Добавить</Text>
-//                 </TouchableOpacity>
-//             </Modal>
-//         </View>
-//     )
-// }
-
     
     return (
       <View style={styles.centeredView}>
         <Modal
           animationType="fade"
           transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-            setModalVisible(!modalVisible);
-          }}
+          visible={isModal}
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-            <TouchableOpacity style = { styles.buttonClose } onPress = {onPressClose} >
+                <TouchableOpacity style = { styles.buttonClose } onPress = {onPressClose} >
                     <Text>X</Text>
                 </TouchableOpacity>
-                <View style = { styles.date }>
-                    <Text style = { styles.dateText }>Дата :</Text>
-                    <TextInput
-                        style={styles.dateInput}
-                        onChangeText={onChangeInputDate}
-                        // value={number}
-                        placeholder="24.01.2020"
-                        keyboardType="numeric"
-                    />
-                </View>
 
-                <View style = { styles.amount }>
-                    <Text style = { styles.amountText }>Сумма :</Text>
-                    <TextInput
-                        style={styles.amountInput}
-                        onChangeText={onChangeInputAmount}
-                        // value={number}
-                        placeholder="10000"
-                        keyboardType="numeric"
-                    />
-                </View>
+                <ModalAddInputs onChangeInputDate = {onChangeInputDate} onChangeInputAmount = { onChangeInputAmount } />
+
                 <TouchableOpacity style = { styles.buttonAdd } onPress = {onPressAdd} >
                     <Text>Добавить</Text>
                 </TouchableOpacity>
@@ -133,24 +71,15 @@ const styles = StyleSheet.create({
       shadowRadius: 4,
       elevation: 5
     },
-    button: {
-      borderRadius: 20,
-      padding: 10,
-      elevation: 2
-    },
-    buttonOpen: {
-      backgroundColor: "#F194FF",
-    },
     buttonClose: {
-      backgroundColor: "#2196F3",
+        backgroundColor: 'green',
+        width: 20,
+        position: 'absolute',
+        right: 0
     },
     textStyle: {
       color: "white",
       fontWeight: "bold",
       textAlign: "center"
     },
-    modalText: {
-      marginBottom: 15,
-      textAlign: "center"
-    }
   });
