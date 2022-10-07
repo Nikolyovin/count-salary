@@ -1,18 +1,22 @@
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { isShowModal } from '../../redux/app-reducer'
+import { isShowModal, isShowSelect } from '../../redux/app-reducer'
 
 const Footer = () => {
     const dispatch = useDispatch()
 
     const onPressAdd = () => dispatch(isShowModal(true))
+    const onPressSelect = () => dispatch(isShowSelect(true))
 
     return (
         <View style = { styles.footer }>
             <View style = { styles.buttonWrap }>
-                <TouchableOpacity style = { styles.button } onPress = {onPressAdd} >
+                <TouchableOpacity style = { styles.buttonAdd } onPress = { onPressAdd } >
                     <Text>Добавить</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style = { styles.buttonSelect } onPress = { onPressSelect } >
+                    <Text>Выбрать месяц</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -30,9 +34,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         
     },
-    button: {
+    buttonAdd: {
         backgroundColor: '#1976d2',
-        width: 130,
+        width: 60,
+        height: 35,
+        borderWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    buttonSelect: {
+        backgroundColor: '#1976d2',
+        width: 60,
         height: 35,
         borderWidth: 1,
         alignItems: 'center',

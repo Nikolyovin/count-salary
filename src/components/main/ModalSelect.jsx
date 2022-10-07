@@ -1,53 +1,38 @@
 import { Image, Modal, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addPayment, isShowModal } from '../../redux/app-reducer'
+import { addPayment, isShowModal, isShowSelect } from '../../redux/app-reducer'
 import ModalAddInputs from './ModalAddInputs.jsx';
+import { Select, SelectModalProvider } from '@mobile-reality/react-native-select-pro';
 
-const ModalAdd = () => {
+const ModalSelect = () => {
     const dispatch = useDispatch()
-    const [ date, onChangeInputDate ] = useState('')
-    const [ amount, onChangeInputAmount ] = useState(0)
-    const [ name, onChangeInputName ] = useState('')
 
-    const payload = {date, amount, name}
+    const onPressClose = () => dispatch(isShowSelect(false))
 
-    const onPressAdd = () => {
-        dispatch(addPayment(payload))
-        onChangeInputDate('')
-        onChangeInputAmount(0)
-        onChangeInputName('')
-    }
-
-    const onPressClose = () => dispatch(isShowModal(false))
-
-    const isModal = useSelector(state => state.app.isModal)
+    const isSelect = useSelector(state => state.app.isSelect)
     
     return (
       <View style={styles.centeredView}>
         <Modal
           animationType="fade"
           transparent={true}
-          visible={isModal}
+          visible={isSelect}
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-                <TouchableOpacity style = { styles.buttonClose } onPress = {onPressClose} >
+              <TouchableOpacity style = { styles.buttonClose } onPress = {onPressClose} >
                     <Text>X</Text>
                 </TouchableOpacity>
-
-                <ModalAddInputs 
-                    onChangeInputDate = {onChangeInputDate} 
-                    onChangeInputAmount = { onChangeInputAmount } 
-                    onChangeInputName = { onChangeInputName }
-                    date = {date} 
-                    amount={amount} 
-                    name={name}
-                />
-
-                <TouchableOpacity style = { styles.buttonAdd } onPress = {onPressAdd} >
-                    <Text>Добавить</Text>
-                </TouchableOpacity>
+              <SelectModalProvider> {/* `SelectModalProvider` wrapping code inside `Modal` */}
+                    <Text>Modal</Text>
+                    <Select
+                        options={[{ value: 'Апрель', label: 'Апрель' }]}
+                    />
+                    <Select
+                        options={[{ value: 'Март', label: 'Март' }]}
+                    />
+                </SelectModalProvider>
             </View>
           </View>
         </Modal>
@@ -55,7 +40,7 @@ const ModalAdd = () => {
     );
 };
 
-export default ModalAdd
+export default ModalSelect
 
 const styles = StyleSheet.create({
     centeredView: {

@@ -2,14 +2,15 @@ import { ScrollView, StyleSheet, FlatList, Text, View } from 'react-native'
 import React from 'react'
 import ModalAdd from './ModalAdd.jsx'
 import Cards from './Cards.jsx'
+import ModalSelect from './ModalSelect.jsx'
 
 
 const Main = () => {
     return (
         <View>
             <Cards/>
-            <View><ModalAdd/></View>
-            
+            <ModalSelect/>
+            <View><ModalAdd/></View> 
         </View>
     )
 }

@@ -1,25 +1,27 @@
 const IS_SHOW_MODAL = "IS_SHOW_MODAL"
 const DELETE_PAYMENT = 'DELETE_PAYMENT'
 const ADD_PAYMENT = 'ADD_PAYMENT'
+const IS_SHOW_SELECT = 'IS_SHOW_SELECT'
 
 const initialState = {
     isModal: false,
+    isSelect: false,
     payments: [
         {
             name: 'Змея',
-            date: '04.05.2023',
+            date: 'Март',
             sum: 15000,
             id: '1'
         },
         {
             name: 'Пион',
-            date: '06.05.2023',
+            date: 'Апрель',
             sum: 5000,
             id: '2'
         },
         {
             name: 'Котик',
-            date: '10.05.2023',
+            date: 'Апрель',
             sum: 10000,
             id: '3'
         },
@@ -35,6 +37,12 @@ const appReducer = (state = initialState, action) => {
                 isModal: action.isModal
             }
 
+        case IS_SHOW_SELECT:
+            return {
+                ...state,
+                isSelect: action.isSelect
+            }
+
         case DELETE_PAYMENT:
             return {
                 ...state,
@@ -42,10 +50,10 @@ const appReducer = (state = initialState, action) => {
             }
 
         case ADD_PAYMENT:
-            console.log('action', action);
+            const {date, name, amount } = action.payload
             return {
                 ...state,
-                payments: [ ...state.payments, { id: Date.now().toString(), date: action, name: action, sum:action } ]
+                payments: [ ...state.payments, { id: Date.now().toString(), date, name, sum:+amount } ]
             }    
 
         default:
@@ -54,6 +62,7 @@ const appReducer = (state = initialState, action) => {
 }
 
 export const isShowModal = (isModal) => ({ type: IS_SHOW_MODAL, isModal })
+export const isShowSelect = (isSelect) => ({ type: IS_SHOW_SELECT, isSelect })
 export const removePayment = (paymentId) => ({ type: DELETE_PAYMENT, paymentId })
 export const addPayment = (payload) => ({ type: ADD_PAYMENT, payload })
 

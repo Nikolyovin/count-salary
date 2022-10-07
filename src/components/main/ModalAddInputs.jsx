@@ -45,7 +45,11 @@ const ModalAddInputs = ({ onChangeInputDate, onChangeInputAmount, date, amount, 
 export default ModalAddInputs
 
 const styles = StyleSheet.create({
-    
+    name: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: "center",
+    },
     date:{
       flexDirection: 'row',
       justifyContent: 'space-between',
