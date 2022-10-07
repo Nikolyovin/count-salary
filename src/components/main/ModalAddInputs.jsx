@@ -3,17 +3,26 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isShowModal } from '../../redux/app-reducer'
 
-const ModalAddInputs = () => {
+const ModalAddInputs = ({ onChangeInputDate, onChangeInputAmount, date, amount, name, onChangeInputName }) => {
 
   return (
     <>
+      <View style = { styles.name }>
+          <Text style = { styles.nameText }>Имя:</Text>
+          <TextInput
+              style={styles.nameInput}
+              onChangeText={onChangeInputName}
+              value={name}
+              placeholder="Название проекта"
+          />
+      </View>
       <View style = { styles.date }>
       
           <Text style = { styles.dateText }>Дата :</Text>
           <TextInput
               style={styles.dateInput}
               onChangeText={onChangeInputDate}
-              // value={number}
+              value={date}
               placeholder="24.01.2020"
               placeholderTextColor="#efefef"
               keyboardType="numeric"
@@ -24,7 +33,7 @@ const ModalAddInputs = () => {
           <TextInput
               style={styles.amountInput}
               onChangeText={onChangeInputAmount}
-              // value={number}
+              value={amount}
               placeholder="10000"
               keyboardType="numeric"
           />

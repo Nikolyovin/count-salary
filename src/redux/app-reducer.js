@@ -1,5 +1,6 @@
 const IS_SHOW_MODAL = "IS_SHOW_MODAL"
 const DELETE_PAYMENT = 'DELETE_PAYMENT'
+const ADD_PAYMENT = 'ADD_PAYMENT'
 
 const initialState = {
     isModal: false,
@@ -37,8 +38,15 @@ const appReducer = (state = initialState, action) => {
         case DELETE_PAYMENT:
             return {
                 ...state,
-                payments: state.payments.filter(({id}) => id != paymentId)
+                payments: state.payments.filter(({id}) => id != action.paymentId)
             }
+
+        case ADD_PAYMENT:
+            console.log('action', action);
+            return {
+                ...state,
+                payments: [ ...state.payments, { id: Date.now().toString(), date: action, name: action, sum:action } ]
+            }    
 
         default:
             return state
@@ -47,6 +55,7 @@ const appReducer = (state = initialState, action) => {
 
 export const isShowModal = (isModal) => ({ type: IS_SHOW_MODAL, isModal })
 export const removePayment = (paymentId) => ({ type: DELETE_PAYMENT, paymentId })
+export const addPayment = (payload) => ({ type: ADD_PAYMENT, payload })
 
 export const requestTasks = () => async (dispatch) => {
     try {

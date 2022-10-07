@@ -13,12 +13,13 @@ const Cards = () => {
         keyExtractor = { item => item.id }                  
         data={payments}
         renderItem={ ({item}) => 
-        <Card 
-          name = {item.name}
-          id = {item.id}
-          date = {item.date}
-          sum = {item.sum}
-        /> }
+          <Card 
+            name = {item.name}
+            id = {item.id}
+            date = {item.date}
+            sum = {item.sum}
+          /> 
+        }
       />
     </View>
   )

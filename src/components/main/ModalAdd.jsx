@@ -1,21 +1,26 @@
 import { Image, Modal, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { isShowModal } from '../../redux/app-reducer'
+import { addPayment, isShowModal } from '../../redux/app-reducer'
 import ModalAddInputs from './ModalAddInputs.jsx';
 
 const ModalAdd = () => {
     const dispatch = useDispatch()
+    const [ date, onChangeInputDate ] = useState('')
+    const [ amount, onChangeInputAmount ] = useState('')
+    const [ name, onChangeInputName ] = useState('')
 
-    const onChangeInputDate = () => {
-        console.log('onChangeInputDate:', onChangeInputDate)
-    }
+    console.log('date', date, amount);
 
-    const onChangeInputAmount = () => {
-        console.log('onChangeInputAmount:', onChangeInputAmount)
-    }
+    // const onChangeInputDate = () => {
+    //     console.log('onChangeInputDate:', onChangeInputDate)
+    // }
 
-    const onPressAdd = () => console.log(onChangeInputDate, onChangeInputAmount);
+    // const onChangeInputAmount = () => {
+    //     console.log('onChangeInputAmount:', onChangeInputAmount)
+    // }
+
+    const onPressAdd = () => dispatch(addPayment({ date, amount, name }));
 
     const onPressClose = () => dispatch(isShowModal(false))
 
@@ -34,7 +39,14 @@ const ModalAdd = () => {
                     <Text>X</Text>
                 </TouchableOpacity>
 
-                <ModalAddInputs onChangeInputDate = {onChangeInputDate} onChangeInputAmount = { onChangeInputAmount } />
+                <ModalAddInputs 
+                    onChangeInputDate = {onChangeInputDate} 
+                    onChangeInputAmount = { onChangeInputAmount } 
+                    onChangeInputName = { onChangeInputName }
+                    date = {date} 
+                    amount={amount} 
+                    name={name}
+                />
 
                 <TouchableOpacity style = { styles.buttonAdd } onPress = {onPressAdd} >
                     <Text>Добавить</Text>
