@@ -2,7 +2,7 @@ import { Image, Modal, StyleSheet, Text, TextInput, View, TouchableOpacity } fro
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isShowModal } from '../../redux/app-reducer'
-import ModalAddInputs from './ModalAddInputs';
+import ModalAddInputs from './ModalAddInputs.jsx';
 
 const ModalAdd = () => {
     const dispatch = useDispatch()

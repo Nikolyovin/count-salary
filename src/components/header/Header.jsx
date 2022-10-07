@@ -3,9 +3,9 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 const Header = () => {
-  const payments = useSelector(state => state.app.salary[0].payments)
+  const payments = useSelector(state => state.app.payments)
   const salary = payments.reduce((sum, current) => sum + current.sum, 0)
-console.log('salary:', salary);
+
   return (
     <View style = { styles.header }>
       <View style = { styles.titleWrap }>
