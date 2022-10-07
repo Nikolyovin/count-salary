@@ -20,19 +20,62 @@ const ModalAdd = () => {
 
     const isModal = useSelector(state => state.app.isModal)
 
+//     return (
+//         <View style = { styles.centeredView }>
+//             <Modal 
+//                 style = { styles.modal }
+//                 animationType = "slide"
+//                 transparent = { true }
+//                 visible = { isModal }
+//             >
+//                 <TouchableOpacity style = { styles.buttonClose } onPress = {onPressClose} >
+//                     <Text>X</Text>
+//                 </TouchableOpacity>
+//                 <View style = { styles.date }>
+//                     <Text style = { styles.dateText }>Дата :</Text>
+//                     <TextInput
+//                         style={styles.dateInput}
+//                         onChangeText={onChangeInputDate}
+//                         // value={number}
+//                         placeholder="24.01.2020"
+//                         keyboardType="numeric"
+//                     />
+//                 </View>
+
+//                 <View style = { styles.amount }>
+//                     <Text style = { styles.amountText }>Сумма :</Text>
+//                     <TextInput
+//                         style={styles.amountInput}
+//                         onChangeText={onChangeInputAmount}
+//                         // value={number}
+//                         placeholder="10000"
+//                         keyboardType="numeric"
+//                     />
+//                 </View>
+//                 <TouchableOpacity style = { styles.buttonAdd } onPress = {onPressAdd} >
+//                     <Text>Добавить</Text>
+//                 </TouchableOpacity>
+//             </Modal>
+//         </View>
+//     )
+// }
+
+    
     return (
-        <View>
-            <Modal 
-                style = { styles.modal }
-                animationType = "slide"
-                transparent = { true }
-                visible = { isModal }
-            >
-                <TouchableOpacity style = { styles.buttonClose } onPress = {onPressClose} >
-                    <Image
-                        style={styles.buttonCloseIcon}
-                        source='https://www.pngfind.com/pngs/m/90-904785_png-file-svg-close-button-icon-png-transparent.png'
-                    />
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+            <TouchableOpacity style = { styles.buttonClose } onPress = {onPressClose} >
+                    <Text>X</Text>
                 </TouchableOpacity>
                 <View style = { styles.date }>
                     <Text style = { styles.dateText }>Дата :</Text>
@@ -58,25 +101,56 @@ const ModalAdd = () => {
                 <TouchableOpacity style = { styles.buttonAdd } onPress = {onPressAdd} >
                     <Text>Добавить</Text>
                 </TouchableOpacity>
-            </Modal>
-        </View>
-    )
-}
+            </View>
+          </View>
+        </Modal>
+          <Text style={styles.textStyle}>Show Modal</Text>
+      </View>
+    );
+};
 
 export default ModalAdd
 
 const styles = StyleSheet.create({
-    modal: {
-
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      marginTop: 22
+    },
+    modalView: {
+      margin: 20,
+      backgroundColor: "white",
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5
+    },
+    button: {
+      borderRadius: 20,
+      padding: 10,
+      elevation: 2
+    },
+    buttonOpen: {
+      backgroundColor: "#F194FF",
     },
     buttonClose: {
-
+      backgroundColor: "#2196F3",
     },
-    buttonCloseIcon: {
-
+    textStyle: {
+      color: "white",
+      fontWeight: "bold",
+      textAlign: "center"
     },
-    buttonAdd: {
-
-    },
-    
-})
+    modalText: {
+      marginBottom: 15,
+      textAlign: "center"
+    }
+  });
