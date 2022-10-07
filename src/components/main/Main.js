@@ -1,8 +1,8 @@
 import { ScrollView, StyleSheet, FlatList, Text, View } from 'react-native'
 import React from 'react'
-import ModalAdd from './ModalAdd.jsx'
-import Cards from './Cards.jsx'
-import ModalSelect from './ModalSelect.jsx'
+import ModalAdd from './ModalAdd.js'
+import Cards from './Cards.js'
+import ModalSelect from './ModalSelect.js'
 
 
 const Main = () => {
