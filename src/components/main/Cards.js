@@ -1,24 +1,26 @@
 import { StyleSheet, FlatList, Text, View } from 'react-native'
 import React from 'react'
-import Card from './Card.jsx'
+import Card from './Card.js'
 import { useSelector } from 'react-redux'
 
 const Cards = () => {
   const payments = useSelector(state => state.app.payments)
-    console.log('payments:', payments);
+  const activeManth = useSelector(state => state.app.activeManth)
+  const activePayments = payments.filter(({ date }) => date == activeManth)
+
   return (
-    <View  style = { styles.cardsWrap }>
+    <View style={styles.cardsWrap}>
       <FlatList  //FlatList нужен для скролла и заменят map 
-        style = { styles.cardsList }                                 
-        keyExtractor = { item => item.id }                  
-        data={payments}
-        renderItem={ ({item}) => 
-          <Card 
-            name = {item.name}
-            id = {item.id}
-            date = {item.date}
-            sum = {item.sum}
-          /> 
+        style={styles.cardsList}
+        keyExtractor={item => item.id}
+        data={activePayments}
+        renderItem={({ item }) =>
+          <Card
+            name={item.name}
+            id={item.id}
+            date={item.date}
+            sum={item.sum}
+          />
         }
       />
     </View>
@@ -34,6 +36,6 @@ const styles = StyleSheet.create({
   },
   cardsList: {
     // alignItems: 'center',
-    
+
   }
 })

@@ -10,13 +10,10 @@ const Footer = () => {
     const onPressSelect = () => dispatch(isShowSelect(true))
 
     return (
-        <View style = { styles.footer }>
-            <View style = { styles.buttonWrap }>
-                <TouchableOpacity style = { styles.buttonAdd } onPress = { onPressAdd } >
-                    <Text>Добавить</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style = { styles.buttonSelect } onPress = { onPressSelect } >
-                    <Text>Выбрать месяц</Text>
+        <View style={styles.footer}>
+            <View style={styles.buttonWrap}>
+                <TouchableOpacity style={styles.buttonAdd} onPress={onPressAdd} >
+                    <Text style={styles.buttonAddText}>Добавить</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -30,24 +27,19 @@ const styles = StyleSheet.create({
         paddingBottom: 30
     },
     buttonWrap: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        paddingHorizontal: 15,
     },
     buttonAdd: {
-        backgroundColor: '#1976d2',
-        width: 60,
-        height: 35,
-        borderWidth: 1,
+        backgroundColor: '#00a8b8',
+        width: '100%',
+        height: 50,
         alignItems: 'center',
         justifyContent: 'center',
+        borderRadius: 20
     },
-    buttonSelect: {
-        backgroundColor: '#1976d2',
-        width: 60,
-        height: 35,
-        borderWidth: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+    buttonAddText: {
+        color: 'white',
     }
 })

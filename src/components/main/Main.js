@@ -3,14 +3,16 @@ import React from 'react'
 import ModalAdd from './ModalAdd.js'
 import Cards from './Cards.js'
 import ModalSelect from './ModalSelect.js'
+import ControlPanel from './ControlPanel.js'
 
 
 const Main = () => {
     return (
-        <View>
-            <Cards/>
-            <ModalSelect/>
-            <View><ModalAdd/></View> 
+        <View style={styles.main}>
+            <ControlPanel />
+            <Cards />
+            <ModalSelect />
+            <ModalAdd />
         </View>
     )
 }
@@ -18,5 +20,7 @@ const Main = () => {
 export default Main
 
 const styles = StyleSheet.create({
-    
+    main: {
+        marginTop: 30
+    }
 })

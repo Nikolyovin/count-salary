@@ -2,28 +2,31 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { removePayment } from '../../redux/app-reducer'
+import iconClose from '../../../assets/close.png'
 
-const Card = ({date, id, name, sum}) => {
+const Card = ({ date, id, name, sum }) => {
     const dispatch = useDispatch()
     const onPressDelete = () => dispatch(removePayment(id))
-    // console.log('date:', date);
-    // console.log('props::', props);
+
     return (
-        <View style = { styles.cardWrap }>
-            <View style = { styles.textNameWrap }>
-                <Text style = { styles.name }>{name}</Text>
+        <View style={styles.conteiner}>
+            <View style={styles.cardWrap}>
+                <View style={styles.textNameDateWrap}>
+                    <Text style={styles.date}>{date}</Text>
+                    <Text style={styles.name}>{name}</Text>
+                </View>
+                <View style={styles.cardFooter}>
+
+                    <Text style={styles.sum}>{sum} р.</Text>
+                </View>
+                <TouchableOpacity style={styles.buttonDelete} onPress={onPressDelete} >
+                    <Image
+                        style={styles.buttonDeleteIcon}
+                        source={iconClose}
+                    />
+                    {/* <Text style={styles.buttonDeleteIcon}>X</Text> */}
+                </TouchableOpacity>
             </View>
-            <View style = { styles.cardFooter }>
-                <Text style = { styles.date }>{date}</Text>
-                <Text style = { styles.sum }>{sum} р.</Text>
-            </View>
-            <TouchableOpacity style = { styles.buttonDelete } onPress = {onPressDelete} >
-                {/* <Image
-                    style={styles.buttonDeleteIcon}
-                    source='https://www.pngfind.com/pngs/m/90-904785_png-file-svg-close-button-icon-png-transparent.png'
-                /> */}
-                <Text style = {styles.buttonDeleteIcon}>X</Text>
-            </TouchableOpacity>
         </View>
     )
 }
@@ -31,40 +34,44 @@ const Card = ({date, id, name, sum}) => {
 export default Card
 
 const styles = StyleSheet.create({
+
     cardWrap: {
         padding: 10,
-        borderColor: 'black', 
-        borderWidth: 1,
+        borderColor: '#edeff1',
+        backgroundColor: '#eff0f5',
+        borderWidth: 3,
         marginTop: 10,
-        marginHorizontal: 30,
-        // alignItems:'center',
-        // width:'80%'
-    },
-    textNameWrap: {
-        alignItems:'center',
-        
-    },
-    name: {
+        marginHorizontal: 10,
+        borderRadius: 20,
+        flexDirection: 'row',
 
     },
-    cardFooter: {
-        alignItems:'center',
-        flexDirection: 'row',
-        justifyContent: 'space-between'
+    textNameDateWrap: {
+        // alignItems: 'center',
+        flex: 1,
     },
     date: {
+        fontWeight: 'bold',
+    },
+    name: {
+        color: '#757575',
+    },
+    cardFooter: {
+        justifyContent: 'flex-end'
+    },
+
+    sum: {
+        color: '#00a8b8',
 
     },
-    sum: {
-        
-    },
     buttonDelete: {
-        backgroundColor: 'green',
+        // backgroundColor: 'green',
         width: 20,
         position: 'absolute',
-        right: 0
+        right: 15
     },
     buttonDeleteIcon: {
-        fontSize: 18
+        width: 30,
+        height: 30
     }
 })
