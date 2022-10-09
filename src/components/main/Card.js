@@ -2,11 +2,11 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { removePayment } from '../../redux/app-reducer'
-import iconClose from '../../../assets/close.png'
+import ButtonClose from '../common/ButtonClose'
 
 const Card = ({ date, id, name, sum }) => {
     const dispatch = useDispatch()
-    const onPressDelete = () => dispatch(removePayment(id))
+    const onPress = () => dispatch(removePayment(id))
 
     return (
         <View style={styles.conteiner}>
@@ -19,13 +19,9 @@ const Card = ({ date, id, name, sum }) => {
 
                     <Text style={styles.sum}>{sum} р.</Text>
                 </View>
-                <TouchableOpacity style={styles.buttonDelete} onPress={onPressDelete} >
-                    <Image
-                        style={styles.buttonDeleteIcon}
-                        source={iconClose}
-                    />
-                    {/* <Text style={styles.buttonDeleteIcon}>X</Text> */}
-                </TouchableOpacity>
+                <View style={styles.button} >
+                    <ButtonClose onPress={onPress} />
+                </View>
             </View>
         </View>
     )
@@ -64,14 +60,8 @@ const styles = StyleSheet.create({
         color: '#00a8b8',
 
     },
-    buttonDelete: {
-        // backgroundColor: 'green',
-        width: 20,
+    button: {
         position: 'absolute',
         right: 15
-    },
-    buttonDeleteIcon: {
-        width: 30,
-        height: 30
     }
 })

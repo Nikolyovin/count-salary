@@ -7,7 +7,6 @@ const Footer = () => {
     const dispatch = useDispatch()
 
     const onPressAdd = () => dispatch(isShowModal(true))
-    const onPressSelect = () => dispatch(isShowSelect(true))
 
     return (
         <View style={styles.footer}>

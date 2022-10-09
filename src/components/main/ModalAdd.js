@@ -1,26 +1,28 @@
-import { Image, Modal, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
+import { Modal, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addPayment, isShowModal } from '../../redux/app-reducer'
-import ModalAddInputs from './ModalAddInputs.js';
+import ModalAddInputs from './ModalAddInputs.js'
+import ButtonClose from '../common/ButtonClose'
 
 const ModalAdd = () => {
   const dispatch = useDispatch()
-  // const [date, onChangeInputDate] = useState('')
+  const [selectedDate, setSelectedDate] = useState('')
   const [amount, onChangeInputAmount] = useState(0)
   const [name, onChangeInputName] = useState('')
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
 
-  const payload = { amount, name }
+  const payload = { amount, name, selectedDate }
 
   const onPressAdd = () => {
     dispatch(addPayment(payload))
-    // onChangeInputDate('')
+    setSelectedDate('')
     onChangeInputAmount(0)
     onChangeInputName('')
+    dispatch(isShowModal(false))
   }
 
-  const onPressClose = () => dispatch(isShowModal(false))
+  const onPress = () => dispatch(isShowModal(false))
 
   const isModal = useSelector(state => state.app.isModal)
 
@@ -40,19 +42,21 @@ const ModalAdd = () => {
               isDatePickerVisible={isDatePickerVisible}
               amount={amount}
               name={name}
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
             />
             <TouchableOpacity style={styles.buttonAdd} onPress={onPressAdd} >
               <Text style={styles.text}>Добавить</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonClose} onPress={onPressClose} >
-              <Text>X</Text>
-            </TouchableOpacity>
+            <View style={styles.buttonClose} >
+              <ButtonClose onPress={onPress} />
+            </View>
           </View>
         </View>
       </Modal>
     </View>
-  );
-};
+  )
+}
 
 export default ModalAdd
 
@@ -97,6 +101,7 @@ const styles = StyleSheet.create({
   buttonClose: {
     width: 20,
     position: 'absolute',
-    right: 0
+    right: 15,
+    top: 5
   },
-});
+})

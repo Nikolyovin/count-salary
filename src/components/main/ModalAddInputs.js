@@ -1,10 +1,20 @@
 import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from 'moment';
 
-const ModalAddInputs = ({ onChangeInputAmount, amount, name, onChangeInputName, setDatePickerVisibility, isDatePickerVisible }) => {
-  const [isVisible, setVisible] = useState(false);
-  const [selectedDate, setSelectedDate] = useState('ну ты крут мужик')
+const ModalAddInputs = ({
+  onChangeInputAmount,
+  amount,
+  name,
+  onChangeInputName,
+  setDatePickerVisibility,
+  isDatePickerVisible,
+  setSelectedDate,
+  selectedDate
+}) => {
+
+  // const [isVisible, setVisible] = useState(false);
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   }
@@ -13,26 +23,21 @@ const ModalAddInputs = ({ onChangeInputAmount, amount, name, onChangeInputName, 
   }
 
   const handleConfirm = (date) => {
-    setSelectedDate(date.toString());
+    const formateDate = moment(date).format('DD-MM-YYYY')
+    setSelectedDate(formateDate);
     console.log('selectedDate', selectedDate);
     hideDatePicker();
   }
   return (
     <>
       <View style={styles.wrap}>
-        <Text style={styles.text}>Дата:</Text>
-        {/* <TouchableOpacity style={styles.buttonDate} onPress={showDatePicker} >
-          <Text style={styles.textButtonDate}>Добавить</Text>
-        </TouchableOpacity> */}
+        <Text style={styles.text}>Дата:    </Text>
         <TouchableOpacity
           activeOpaticy={1}
           onPress={showDatePicker}
           style={styles.input}
-        // onPress={showDatePicker} 
         >
           <TextInput
-
-            // onPressIn={showDatePicker}
             editable={false}
             value={selectedDate}
             placeholder="Укажите дату..."
@@ -84,6 +89,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold'
   },
+  inputDate: {
+
+  },
   input: {
     paddingHorizontal: 10,
     marginLeft: 15,
@@ -93,6 +101,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#00a8b8',
     borderRadius: 10,
+    justifyContent: 'center',
   },
   buttonDate: {
     marginTop: 15,

@@ -52,10 +52,10 @@ const appReducer = (state = initialState, action) => {
             }
 
         case ADD_PAYMENT:
-            const { date, name, amount } = action.payload
+            const { selectedDate, name, amount } = action.payload
             return {
                 ...state,
-                payments: [...state.payments, { id: Date.now().toString(), date, name, sum: +amount }]
+                payments: [...state.payments, { id: Date.now().toString(), date: selectedDate, name, sum: amount }]
             }
 
         case SELECT_MANTH:
@@ -83,7 +83,5 @@ export const requestTasks = () => async (dispatch) => {
         console.log(e)
     }
 }
-
-
 
 export default appReducer
