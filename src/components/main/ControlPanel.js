@@ -1,9 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { choiceActiveMonth } from '../../redux/app-reducer'
 
 const ControlPanel = () => {
+    const [ activeButton, setActiveButton ] = useState(MONTH.JANUARY)
+
     const dispatch = useDispatch()
     const onPressJanuary = () => dispatch(choiceActiveMonth(MONTH.JANUARY))
     const onPressFebruary = () => dispatch(choiceActiveMonth(MONTH.FEBRUARY))
@@ -20,8 +22,8 @@ const ControlPanel = () => {
 
     return (
         <View style={styles.controlPanelWrap}>
-            <TouchableOpacity style={styles.button} onPress={onPressJanuary}>
-                <Text style={styles.text}>Январь</Text>
+            <TouchableOpacity  onPress={onPressJanuary}>
+                <Text >Январь</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={onPressFebruary}>
                 <Text style={styles.text}>Февраль</Text>
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around',
         backgroundColor: '#eff0f5',
-        height: 60,
+        height: 50,
         marginHorizontal: 10,
         borderRadius: 20,
     },

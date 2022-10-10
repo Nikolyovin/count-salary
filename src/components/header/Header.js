@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
@@ -11,12 +11,14 @@ const Header = () => {
   const salary = activePayments.reduce((sum, current) => sum + current.sum, 0)
 
   return (
-    <View style={styles.header}>
+    <View style = { styles.header }>
+    {/* <Image source = { 'https://naked-science.ru/wp-content/uploads/2021/01/1411101555_90-1-scaled.jpg' } style = { styles.header }> */}
       <View style={styles.titleWrap}>
         <Text style={styles.title}>Зарплата за {activeMonth}: </Text>
         <Text style={styles.title}> {salary} рублей</Text>
       </View>
-    </View>
+      </View>
+    // </Image>
   )
 }
 
@@ -25,9 +27,10 @@ export default Header
 const styles = StyleSheet.create({
   header: {
     paddingTop: 20,
-    // borderColor: 'black',
-    // borderWidth: 2,
-    height: 100
+    height: 100,
+    // flex: 1,
+    // alignSelf: 'stretch',
+    // width: null,
   },
   titleWrap: {
     justifyContent: 'center',

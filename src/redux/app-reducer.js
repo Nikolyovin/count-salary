@@ -71,6 +71,7 @@ const appReducer = (state = initialState, action) => {
             }
 
         case SELECT_MANTH:
+            console.warn(action);
             return {
                 ...state,
                 activeMonth: action.activeMonth
