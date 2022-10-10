@@ -26,6 +26,8 @@ const ModalAdd = () => {
 
   const isModal = useSelector(state => state.app.isModal)
 
+  console.warn('selectedDate', typeof selectedDate);
+
   return (
     <View style={styles.centeredView}>
       <Modal

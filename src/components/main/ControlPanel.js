@@ -1,22 +1,22 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { choiceActiveManth } from '../../redux/app-reducer'
+import { choiceActiveMonth } from '../../redux/app-reducer'
 
 const ControlPanel = () => {
     const dispatch = useDispatch()
-    const onPressJanuary = () => dispatch(choiceActiveManth('Январь'))
-    const onPressFebruary = () => dispatch(choiceActiveManth('Февраль'))
-    const onPressApril = () => dispatch(choiceActiveManth('Апрель'))
-    const onPressMarch = () => dispatch(choiceActiveManth('Март'))
-    const onPressMay = () => dispatch(choiceActiveManth('Май'))
-    const onPressJune = () => dispatch(choiceActiveManth('Июнь'))
-    const onPressJule = () => dispatch(choiceActiveManth('Июль'))
-    const onPressAugust = () => dispatch(choiceActiveManth('Август'))
-    const onPressSeptember = () => dispatch(choiceActiveManth('Сентябрь'))
-    const onPressOctouber = () => dispatch(choiceActiveManth('Октябрь'))
-    const onPressNovember = () => dispatch(choiceActiveManth('Ноябрь'))
-    const onPressDesember = () => dispatch(choiceActiveManth('Декабрь'))
+    const onPressJanuary = () => dispatch(choiceActiveMonth(MONTH.JANUARY))
+    const onPressFebruary = () => dispatch(choiceActiveMonth(MONTH.FEBRUARY))
+    const onPressMarch = () => dispatch(choiceActiveMonth(MONTH.MARCH))
+    const onPressApril = () => dispatch(choiceActiveMonth(MONTH.APRIL))
+    const onPressMay = () => dispatch(choiceActiveMonth('Май'))
+    const onPressJune = () => dispatch(choiceActiveMonth('Июнь'))
+    const onPressJule = () => dispatch(choiceActiveMonth('Июль'))
+    const onPressAugust = () => dispatch(choiceActiveMonth('Август'))
+    const onPressSeptember = () => dispatch(choiceActiveMonth('Сентябрь'))
+    const onPressOctouber = () => dispatch(choiceActiveMonth('Октябрь'))
+    const onPressNovember = () => dispatch(choiceActiveMonth('Ноябрь'))
+    const onPressDesember = () => dispatch(choiceActiveMonth('Декабрь'))
 
     return (
         <View style={styles.controlPanelWrap}>

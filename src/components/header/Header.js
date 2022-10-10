@@ -4,14 +4,16 @@ import { useSelector } from 'react-redux'
 
 const Header = () => {
   const payments = useSelector(state => state.app.payments)
-  const activeManth = useSelector(state => state.app.activeManth)
-  const activePayments = payments.filter(({ date }) => date == activeManth)
+  const activeMonth = useSelector(state => state.app.activeMonth)
+
+  const activePayments = payments.filter(({ date }) => date.split('.')[1] == activeMonth)
+
   const salary = activePayments.reduce((sum, current) => sum + current.sum, 0)
 
   return (
     <View style={styles.header}>
       <View style={styles.titleWrap}>
-        <Text style={styles.title}>Зарплата за {activeManth}: </Text>
+        <Text style={styles.title}>Зарплата за {activeMonth}: </Text>
         <Text style={styles.title}> {salary} рублей</Text>
       </View>
     </View>

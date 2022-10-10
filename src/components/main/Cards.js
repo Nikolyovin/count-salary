@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux'
 
 const Cards = () => {
   const payments = useSelector(state => state.app.payments)
-  // const activeManth = useSelector(state => state.app.activeManth)
-  // const activePayments = payments.filter(({ date }) => date == activeManth)
+  // const activeMonth = useSelector(state => state.app.activeMonth)
+  // const activePayments = payments.filter(({ date }) => date == activeMonth)
 
   return (
     <View style={styles.cardsWrap}>
