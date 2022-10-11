@@ -21,6 +21,6 @@ export default Main
 
 const styles = StyleSheet.create({
     main: {
-        marginTop: 30
+
     }
 })

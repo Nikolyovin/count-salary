@@ -7,18 +7,18 @@ const Header = () => {
   const payments = useSelector(state => state.app.payments)
   const activeMonth = useSelector(state => state.app.activeMonth)
 
-  const activePayments = payments.filter(({ date }) => date.split('.')[1] == activeMonth)
+  const activePayments = payments.filter(({ date }) => date.split('-')[1] == activeMonth)
 
   const salary = activePayments.reduce((sum, current) => sum + current.sum, 0)
 
   return (
-    <View style = { styles.header }>
-    {/* <Image source = { 'https://naked-science.ru/wp-content/uploads/2021/01/1411101555_90-1-scaled.jpg' } style = { styles.header }> */}
-      <ImageBackground 
-        source = { img } 
-        resizeMode = "cover" 
-        style = { styles.image }
-        imageStyle = {{ opacity:0.7 }}
+    <View style={styles.header}>
+      {/* <Image source = { 'https://naked-science.ru/wp-content/uploads/2021/01/1411101555_90-1-scaled.jpg' } style = { styles.header }> */}
+      <ImageBackground
+        source={img}
+        resizeMode="cover"
+        style={styles.image}
+        imageStyle={{ opacity: 0.7 }}
       >
         <View style={styles.titleWrap}>
           <Text style={styles.title}>Зарплата за {activeMonth}: </Text>
@@ -34,13 +34,14 @@ export default Header
 
 const styles = StyleSheet.create({
   header: {
-    paddingTop: 20,
-    height: 100,
+    height: 180,
     // flex: 1,
     // alignSelf: 'stretch',
     // width: null,
   },
   image: {
+    // paddingTop: 20,
+
     flex: 1,
     justifyContent: "center"
   },
@@ -51,7 +52,8 @@ const styles = StyleSheet.create({
   title: {
     // color: 'white',
     fontSize: 32,
-    fontFamily: ''
+    fontFamily: '',
+    fontWeight: 'bold'
   },
 
 })

@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, Text, View, Alert } from 'react-native'
+import { StyleSheet, FlatList, View } from 'react-native'
 import React from 'react'
 import Card from './Card.js'
 import { useSelector } from 'react-redux'
@@ -6,8 +6,7 @@ import { useSelector } from 'react-redux'
 const Cards = () => {
   const payments = useSelector(state => state.app.payments)
   const activeMonth = useSelector(state => state.app.activeMonth)
-  const activePayments = payments.filter(({ date }) => date.split('.')[1] == activeMonth)
-  Alert.alert(activeMonth)
+  const activePayments = payments.filter(({ date }) => date.split('-')[1] == activeMonth)
 
   return (
     <View style={styles.cardsWrap}>
