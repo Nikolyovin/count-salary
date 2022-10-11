@@ -12,10 +12,9 @@ const Header = () => {
 
   const salary = activePayments.reduce((sum, current) => sum + current.sum, 0)
   
-  for (let numMonth of MONTHRUS.keys()){
+  for (let numMonth of MONTHRUS.keys()) {                   //для преобразования в названия месяца 
     if (numMonth == activeMonth) {
-      console.log('activeMonth:', activeMonth)
-      activeMonth = MONTHRUS[numMonth]
+      activeMonth = MONTHRUS.get(numMonth)
     }
   }
 
