@@ -14,19 +14,19 @@ const Cards = () => {
   useEffect(() => {
     dispatch(requestPayments())
   }, [])
-  
+
   return (
-    <View style = { styles.cardsWrap }>
+    <View style={styles.cardsWrap}>
       <FlatList  //FlatList нужен для скролла и заменят map 
-        style = { styles.cardsList }
-        keyExtractor = { item => item.id }
-        data = { activePayments }
-        renderItem = {({ item }) =>
+        style={styles.cardsList}
+        keyExtractor={item => item.id}
+        data={activePayments}
+        renderItem={({ item }) =>
           <Card
-            name = { item.name }
-            id = { item.id }
-            date = { item.date }
-            sum = { item.sum }
+            name={item.name}
+            id={item.id}
+            date={item.date}
+            sum={item.sum}
           />
         }
       />

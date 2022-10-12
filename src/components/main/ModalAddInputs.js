@@ -25,7 +25,7 @@ const ModalAddInputs = ({
   const handleConfirm = (date) => {
     const formateDate = moment(date).format('DD-MM-YYYY')
     setSelectedDate(formateDate);
-    console.log('selectedDate', selectedDate);
+    0
     hideDatePicker();
   }
   return (

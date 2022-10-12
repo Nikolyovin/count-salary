@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View, AsyncStorage } from 'react-native'
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { removePayment } from '../../redux/app-reducer'
 import ButtonClose from '../common/ButtonClose'
 
@@ -10,15 +10,22 @@ const Card = ({ date, id, name, sum }) => {
 
     const remove = async () => {          //удаление происходит путем апдейта payments
         try {
-          await AsyncStorage.setItem('payments', payments)
+            await AsyncStorage.setItem('payments', JSON.stringify(payments))
+            keys = await AsyncStorage.getAllKeys()
+            console.log('keys', keys);
         } catch (err) {
-          Alert.alert(err)
+            Alert.alert(err.message)
         }
-      }
+    }
+    useEffect(() => {
+        remove()
+    }, [payments])
 
     const onPress = () => {
         dispatch(removePayment(id))
-        remove()
+        // remove()
+
+
     }
 
     return (
