@@ -1,12 +1,13 @@
+import { AsyncStorage } from 'react-native'
+
 const IS_SHOW_MODAL = "IS_SHOW_MODAL"
 const DELETE_PAYMENT = 'DELETE_PAYMENT'
 const ADD_PAYMENT = 'ADD_PAYMENT'
-const IS_SHOW_SELECT = 'IS_SHOW_SELECT'
 const SELECT_MANTH = 'SELECT_MANTH'
+const SET_PAYMENTS = 'SET_PAYMENTS'
 
 const initialState = {
     isModal: false,
-    isSelect: false,
     activeMonth: '',
     payments: [
         {
@@ -51,12 +52,6 @@ const appReducer = (state = initialState, action) => {
                 isModal: action.isModal
             }
 
-        case IS_SHOW_SELECT:
-            return {
-                ...state,
-                isSelect: action.isSelect
-            }
-
         case DELETE_PAYMENT:
             return {
                 ...state,
@@ -64,7 +59,6 @@ const appReducer = (state = initialState, action) => {
             }
 
         case ADD_PAYMENT:
-            console.log('action', action);
             const { selectedDate, name, amount } = action.payload
             return {
                 ...state,
@@ -77,24 +71,39 @@ const appReducer = (state = initialState, action) => {
                 activeMonth: action.activeMonth
             }
 
+        case SET_PAYMENTS:
+            return {
+                ...state,
+                payments: action.payments
+            }
+
         default:
             return state
     }
 }
 
+export const setPayments = (payments) => ({ type: SET_PAYMENTS, payments})
 export const isShowModal = (isModal) => ({ type: IS_SHOW_MODAL, isModal })
-export const isShowSelect = (isSelect) => ({ type: IS_SHOW_SELECT, isSelect })
 export const removePayment = (paymentId) => ({ type: DELETE_PAYMENT, paymentId })
 export const addPayment = (payload) => ({ type: ADD_PAYMENT, payload })
 export const choiceActiveMonth = (activeMonth) => ({ type: SELECT_MANTH, activeMonth })
 
-export const requestTasks = () => async (dispatch) => {
+export const requestPayments = () => async (dispatch) => {
     try {
-        // const response = await TasksService.getTasks()
-        // dispatch(setTasks(response.data))
+        const payments = await AsyncStorage.getItem('payments')
+        dispatch(setTasks(payments))
     } catch (e) {
         console.log(e)
     }
 }
+
+// export const addPayments = () => async (dispatch) => {
+//     try {
+//         const response = 
+//         // dispatch(setTasks(response.data))
+//     } catch (e) {
+//         console.log(e)
+//     }
+// }
 
 export default appReducer

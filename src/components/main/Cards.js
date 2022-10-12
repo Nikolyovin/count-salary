@@ -1,25 +1,32 @@
-import { StyleSheet, FlatList, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, FlatList, View, Alert } from 'react-native'
+import React, { useEffect } from 'react'
 import Card from './Card.js'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { requestPayments } from '../../redux/app-reducer.js'
 
 const Cards = () => {
+  const dispatch = useDispatch()
+
   const payments = useSelector(state => state.app.payments)
   const activeMonth = useSelector(state => state.app.activeMonth)
   const activePayments = payments.filter(({ date }) => date.split('-')[1] == activeMonth)
 
+  useEffect(() => {
+    dispatch(requestPayments())
+  }, [])
+  
   return (
-    <View style={styles.cardsWrap}>
+    <View style = { styles.cardsWrap }>
       <FlatList  //FlatList нужен для скролла и заменят map 
-        style={styles.cardsList}
-        keyExtractor={item => item.id}
-        data={activePayments}
-        renderItem={({ item }) =>
+        style = { styles.cardsList }
+        keyExtractor = { item => item.id }
+        data = { activePayments }
+        renderItem = {({ item }) =>
           <Card
-            name={item.name}
-            id={item.id}
-            date={item.date}
-            sum={item.sum}
+            name = { item.name }
+            id = { item.id }
+            date = { item.date }
+            sum = { item.sum }
           />
         }
       />

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View, AsyncStorage } from 'react-native'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { removePayment } from '../../redux/app-reducer'
@@ -6,7 +6,20 @@ import ButtonClose from '../common/ButtonClose'
 
 const Card = ({ date, id, name, sum }) => {
     const dispatch = useDispatch()
-    const onPress = () => dispatch(removePayment(id))
+    const payments = useSelector(state => state.app.payments)
+
+    const remove = async () => {          //удаление происходит путем апдейта payments
+        try {
+          await AsyncStorage.setItem('payments', payments)
+        } catch (err) {
+          Alert.alert(err)
+        }
+      }
+
+    const onPress = () => {
+        dispatch(removePayment(id))
+        remove()
+    }
 
     return (
         <View style={styles.conteiner}>
