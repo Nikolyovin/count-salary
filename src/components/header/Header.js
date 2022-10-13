@@ -20,7 +20,6 @@ const Header = () => {
 
   return (
     <View style={styles.header}>
-      {/* <Image source = { 'https://naked-science.ru/wp-content/uploads/2021/01/1411101555_90-1-scaled.jpg' } style = { styles.header }> */}
       <ImageBackground
         source={img}
         resizeMode="cover"
@@ -33,7 +32,6 @@ const Header = () => {
         </View>
       </ImageBackground>
     </View>
-    // </Image>
   )
 }
 
@@ -42,13 +40,8 @@ export default Header
 const styles = StyleSheet.create({
   header: {
     height: 180,
-    // flex: 1,
-    // alignSelf: 'stretch',
-    // width: null,
   },
   image: {
-    // paddingTop: 20,
-
     flex: 1,
     justifyContent: "center"
   },
@@ -57,9 +50,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   title: {
-    // color: 'white',
     fontSize: 32,
-    fontFamily: '',
+    fontFamily: 'Roboto-Medium',
     fontWeight: 'bold'
   },
 
