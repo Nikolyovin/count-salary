@@ -5,11 +5,14 @@ const DELETE_PAYMENT = 'DELETE_PAYMENT'
 const ADD_PAYMENT = 'ADD_PAYMENT'
 const SELECT_MANTH = 'SELECT_MANTH'
 const SET_PAYMENTS = 'SET_PAYMENTS'
+const CHOICE_CURRENT_PAYMENT = 'CHOICE_CURRENT_PAYMENT'
+const UPDATE_PAYMENT = 'UPDATE_PAYMENT'
 
 const initialState = {
     isModal: false,
     activeMonth: '',
-    payments: []
+    payments: [],
+    currentPayment: {},
 }
 
 const appReducer = (state = initialState, action) => {
@@ -27,12 +30,13 @@ const appReducer = (state = initialState, action) => {
                 payments: state.payments.filter(({ id }) => id != action.paymentId)
             }
 
-        case ADD_PAYMENT:
+        case ADD_PAYMENT: {
             const { selectedDate, name, amount } = action.payload
             return {
                 ...state,
                 payments: [...state.payments, { id: Date.now().toString(), date: selectedDate, name, sum: +amount }]
             }
+        }
 
         case SELECT_MANTH:
             return {
@@ -41,12 +45,31 @@ const appReducer = (state = initialState, action) => {
             }
 
         case SET_PAYMENTS:
-            console.log('action.payments', action.payments);
             return {
-
                 ...state,
                 payments: action.payments
             }
+
+        case CHOICE_CURRENT_PAYMENT: 
+            const currentPayment = action.paymentId 
+                ? state.payments.find({ id } == action.paymentId)
+                : {}
+            return {
+                ...state,
+                currentPayment: currentPayment
+            }
+
+        case UPDATE_PAYMENT: {
+            const { selectedDate, name, amount, id } = action.payload
+            return { 
+                ...state, 
+                payments:  state.payments.map((item) => 
+                    item.id === id 
+                        ? { ...payments, date: selectedDate, name, sum: +amount }
+                        : payments
+                )
+            }
+        }
 
         default:
             return state
@@ -58,6 +81,8 @@ export const isShowModal = (isModal) => ({ type: IS_SHOW_MODAL, isModal })
 export const removePayment = (paymentId) => ({ type: DELETE_PAYMENT, paymentId })
 export const addPayment = (payload) => ({ type: ADD_PAYMENT, payload })
 export const choiceActiveMonth = (activeMonth) => ({ type: SELECT_MANTH, activeMonth })
+export const choiceCurrentPayment = (paymentId) => ({ type: CHOICE_CURRENT_PAYMENT, paymentId })
+export const updatePayment = (payload) => ({ type: UPDATE_PAYMENT, payload })
 
 export const requestPayments = () => async (dispatch) => {
     try {

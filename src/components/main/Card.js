@@ -1,18 +1,21 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View, AsyncStorage } from 'react-native'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { removePayment } from '../../redux/app-reducer'
+import { choiceCurrentPayment, isShowModal, removePayment } from '../../redux/app-reducer'
 import ButtonClose from '../common/ButtonClose'
 
 const Card = ({ date, id, name, sum }) => {
     const dispatch = useDispatch()
     const payments = useSelector(state => state.app.payments)
 
+    const updatePayment = (id) => {
+        dispatch(isShowModal(true))
+        dispatch(choiceCurrentPayment(id))
+    }
+
     const remove = async () => {          //удаление происходит путем апдейта payments
         try {
             await AsyncStorage.setItem('payments', JSON.stringify(payments))
-            keys = await AsyncStorage.getAllKeys()
-            console.log('keys', keys);
         } catch (err) {
             Alert.alert(err.message)
         }
@@ -29,20 +32,22 @@ const Card = ({ date, id, name, sum }) => {
     }
 
     return (
-        <View style={styles.conteiner}>
-            <View style={styles.cardWrap}>
-                <View style={styles.textNameDateWrap}>
-                    <Text style={styles.date}>{date}</Text>
-                    <Text style={styles.name}>{name}</Text>
-                </View>
-                <View style={styles.cardFooter}>
+        <View style={styles.conteiner} >
+            <TouchableOpacity style={styles.cardWrap} onLongPress = { updatePayment }>
+                {/* <View style={styles.cardWrap}> */}
+                    <View style={styles.textNameDateWrap}>
+                        <Text style={styles.date}>{date}</Text>
+                        <Text style={styles.name}>{name}</Text>
+                    </View>
+                    <View style={styles.cardFooter}>
 
-                    <Text style={styles.sum}>{sum} р.</Text>
-                </View>
-                <View style={styles.button} >
-                    <ButtonClose onPress={onPress} />
-                </View>
-            </View>
+                        <Text style={styles.sum}>{sum} р.</Text>
+                    </View>
+                    <View style={styles.button} >
+                        <ButtonClose onPress={onPress} />
+                    </View>
+            </TouchableOpacity>
+                {/* </View> */}
         </View>
     )
 }
