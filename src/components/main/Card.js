@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View, AsyncStorage } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View, AsyncStorage, Alert } from 'react-native'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { choiceCurrentPayment, isShowModal, removePayment } from '../../redux/app-reducer'
@@ -25,10 +25,22 @@ const Card = ({ date, id, name, sum }) => {
     }, [payments])
 
     const onClose = () => {
-        dispatch(removePayment(id))
-        // remove()
-
-
+        Alert.alert(
+            "Вы действительно удалить?",
+            `${name} ${sum}`,
+            [
+                {
+                    text: "Отменить",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: 'cancel',
+                },
+                {
+                    text: "Да",
+                    onPress: () => dispatch(removePayment(id)),
+                    style: 'default',
+                },
+            ],
+        )
     }
 
     return (
