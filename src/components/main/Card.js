@@ -24,7 +24,7 @@ const Card = ({ date, id, name, sum }) => {
         remove()
     }, [payments])
 
-    const onPress = () => {
+    const onClose = () => {
         dispatch(removePayment(id))
         // remove()
 
@@ -44,7 +44,7 @@ const Card = ({ date, id, name, sum }) => {
                     <Text style={styles.sum}>{sum} р.</Text>
                 </View>
                 <View style={styles.button} >
-                    <ButtonClose onPress={onPress} />
+                    <ButtonClose onClose={onClose} />
                 </View>
             </TouchableOpacity>
             {/* </View> */}

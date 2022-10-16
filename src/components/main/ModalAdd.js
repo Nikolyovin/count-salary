@@ -15,21 +15,17 @@ const ModalAdd = () => {
 
   const isNew = (Object.keys(currentPayment).length == 0)
 
-
   const [selectedDate, setSelectedDate] = useState('')
   const [amount, onChangeInputAmount] = useState(null)
   const [name, onChangeInputName] = useState('')
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
-  console.log('test', amount, selectedDate, name)
   const payload = { amount, name, selectedDate }
-  console.log('currentPayment', currentPayment);
 
   useEffect(() => {
     setSelectedDate(currentPayment.date)
     onChangeInputAmount(currentPayment.sum)
     onChangeInputName(currentPayment.name)
   }, [currentPayment])
-
 
   const save = async () => {
     try {
@@ -50,12 +46,14 @@ const ModalAdd = () => {
 
   const onPressUpdate = () => {
     dispatch(updatePayment({ ...payload, id: currentPayment.id }))
-    console.log('payload', payload);
-    // dispatch(choiceCurrentPayment())
+    dispatch(choiceCurrentPayment())
     clearModal()
   }
 
-  const onPress = () => dispatch(isShowModal(false))
+  const onClose = () => {
+    dispatch(isShowModal(false))
+    dispatch(choiceCurrentPayment())
+  }
 
   const clearModal = () => {
     setSelectedDate('')
@@ -64,12 +62,17 @@ const ModalAdd = () => {
     dispatch(isShowModal(false))
   }
 
+  const onShow = () => {
+
+  }
+
   return (
     <View style={styles.centeredView}>
       <Modal
         animationType="fade"
         transparent={true}
         visible={isModal}
+        onShow={onShow}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -81,6 +84,10 @@ const ModalAdd = () => {
               isNew={isNew}
               setSelectedDate={setSelectedDate}
               currentPayment={currentPayment}
+              currentDate={currentPayment.date}
+              selectedDate={selectedDate}
+              amount={amount}
+              name={name}
             />
             <ModalButons
               onPressAdd={onPressAdd}
@@ -88,7 +95,7 @@ const ModalAdd = () => {
               onPressUpdate={onPressUpdate}
             />
             <View style={styles.buttonClose} >
-              <ButtonClose onPress={onPress} />
+              <ButtonClose onClose={onClose} />
             </View>
           </View>
         </View>

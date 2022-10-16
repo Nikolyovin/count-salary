@@ -1,5 +1,5 @@
-import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React from 'react'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
 
@@ -9,23 +9,22 @@ const ModalAddInputs = ({
   setDatePickerVisibility,
   isDatePickerVisible,
   setSelectedDate,
+  name,
   isNew,
-  currentPayment
+  selectedDate,
+  amount
 }) => {
-  // console.log('currentPayment1', currentPayment);
-  const { sum, name, date } = currentPayment
-  // console.log('Currentdate', date.format())
+
   const showDatePicker = () => {
-    setDatePickerVisibility(true);
+    setDatePickerVisibility(true)
   }
 
   const hideDatePicker = () => setDatePickerVisibility(false)
 
   const handleConfirm = (date) => {
-    // console.log('date', date);
     const formateDate = moment(date).format('DD-MM-YYYY')
-    setSelectedDate(formateDate);
-    hideDatePicker();
+    setSelectedDate(formateDate)
+    hideDatePicker()
   }
   return (
     <>
@@ -38,25 +37,16 @@ const ModalAddInputs = ({
         >
           <TextInput
             editable={false}
-            defaultValue={date}
+            defaultValue={selectedDate}
             placeholder="Укажите дату..."
           />
         </TouchableOpacity>
-        {!isNew
-          ? <DateTimePickerModal
-            // date={date}
-            isVisible={isDatePickerVisible}
-            mode="date"
-            onConfirm={handleConfirm}
-            onCancel={hideDatePicker}
-          />
-          : <DateTimePickerModal
-            isVisible={isDatePickerVisible}
-            mode="date"
-            onConfirm={handleConfirm}
-            onCancel={hideDatePicker}
-          />
-        }
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
       </View>
 
       <View style={styles.wrap}>
@@ -65,7 +55,6 @@ const ModalAddInputs = ({
           style={styles.input}
           onChangeText={onChangeInputName}
           defaultValue={name}
-          // value={name}
           placeholder="Краткое описание работы..."
         />
       </View>
@@ -75,14 +64,14 @@ const ModalAddInputs = ({
         <TextInput
           style={styles.input}
           onChangeText={onChangeInputAmount}
-          defaultValue={String(sum)}
+          defaultValue={isNew ? null : String(amount)}
           placeholder="Сумма..."
           keyboardType="numeric"
         />
       </View>
     </>
   )
-};
+}
 
 export default ModalAddInputs
 
@@ -92,7 +81,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: "center",
     marginBottom: 15,
-    // marginRight: 10
   },
   text: {
     fontSize: 16,
@@ -124,4 +112,4 @@ const styles = StyleSheet.create({
   textButtonDate: {
     color: 'white',
   },
-});
+})

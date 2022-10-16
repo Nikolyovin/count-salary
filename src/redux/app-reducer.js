@@ -51,7 +51,9 @@ const appReducer = (state = initialState, action) => {
             }
 
         case CHOICE_CURRENT_PAYMENT:
-            const currentPayment = state.payments.find(({ id }) => id == action.paymentId)
+            const currentPayment = action.paymentId
+                ? state.payments.find(({ id }) => id == action.paymentId)
+                : {}
             return {
                 ...state,
                 currentPayment: currentPayment
