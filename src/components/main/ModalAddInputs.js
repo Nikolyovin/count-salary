@@ -5,27 +5,26 @@ import moment from 'moment';
 
 const ModalAddInputs = ({
   onChangeInputAmount,
-  amount,
-  name,
   onChangeInputName,
   setDatePickerVisibility,
   isDatePickerVisible,
   setSelectedDate,
-  selectedDate
+  isNew,
+  currentPayment
 }) => {
-
-  // const [isVisible, setVisible] = useState(false);
+  // console.log('currentPayment1', currentPayment);
+  const { sum, name, date } = currentPayment
+  // console.log('Currentdate', date.format())
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   }
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  }
+
+  const hideDatePicker = () => setDatePickerVisibility(false)
 
   const handleConfirm = (date) => {
+    // console.log('date', date);
     const formateDate = moment(date).format('DD-MM-YYYY')
     setSelectedDate(formateDate);
-    0
     hideDatePicker();
   }
   return (
@@ -39,16 +38,25 @@ const ModalAddInputs = ({
         >
           <TextInput
             editable={false}
-            value={selectedDate}
+            defaultValue={date}
             placeholder="Укажите дату..."
           />
         </TouchableOpacity>
-        <DateTimePickerModal
-          isVisible={isDatePickerVisible}
-          mode="date"
-          onConfirm={handleConfirm}
-          onCancel={hideDatePicker}
-        />
+        {!isNew
+          ? <DateTimePickerModal
+            // date={date}
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+          />
+          : <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+          />
+        }
       </View>
 
       <View style={styles.wrap}>
@@ -56,7 +64,8 @@ const ModalAddInputs = ({
         <TextInput
           style={styles.input}
           onChangeText={onChangeInputName}
-          value={name}
+          defaultValue={name}
+          // value={name}
           placeholder="Краткое описание работы..."
         />
       </View>
@@ -66,7 +75,7 @@ const ModalAddInputs = ({
         <TextInput
           style={styles.input}
           onChangeText={onChangeInputAmount}
-          value={amount}
+          defaultValue={String(sum)}
           placeholder="Сумма..."
           keyboardType="numeric"
         />

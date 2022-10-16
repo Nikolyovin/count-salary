@@ -8,6 +8,9 @@ const Cards = () => {
   const dispatch = useDispatch()
 
   const payments = useSelector(state => state.app.payments)
+  const state = useSelector(state => state)
+  // console.log('state', state);
+  // console.log('payments', payments);
   const activeMonth = useSelector(state => state.app.activeMonth)
   const activePayments = payments.filter(({ date }) => date.split('-')[1] == activeMonth)
 

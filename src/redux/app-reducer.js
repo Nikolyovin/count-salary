@@ -50,24 +50,19 @@ const appReducer = (state = initialState, action) => {
                 payments: action.payments
             }
 
-        case CHOICE_CURRENT_PAYMENT: 
-            const currentPayment = action.paymentId 
-                ? state.payments.find({ id } == action.paymentId)
-                : {}
+        case CHOICE_CURRENT_PAYMENT:
+            const currentPayment = state.payments.find(({ id }) => id == action.paymentId)
             return {
                 ...state,
                 currentPayment: currentPayment
             }
 
         case UPDATE_PAYMENT: {
+            // console.log('action.payload', action.payload);
             const { selectedDate, name, amount, id } = action.payload
-            return { 
-                ...state, 
-                payments:  state.payments.map((item) => 
-                    item.id === id 
-                        ? { ...payments, date: selectedDate, name, sum: +amount }
-                        : payments
-                )
+            return {
+                ...state,
+                payments: state.payments.map(payment => payment.id === id ? { ...payment, date: selectedDate, name, sum: +amount } : payment)
             }
         }
 
@@ -83,6 +78,7 @@ export const addPayment = (payload) => ({ type: ADD_PAYMENT, payload })
 export const choiceActiveMonth = (activeMonth) => ({ type: SELECT_MANTH, activeMonth })
 export const choiceCurrentPayment = (paymentId) => ({ type: CHOICE_CURRENT_PAYMENT, paymentId })
 export const updatePayment = (payload) => ({ type: UPDATE_PAYMENT, payload })
+
 
 export const requestPayments = () => async (dispatch) => {
     try {

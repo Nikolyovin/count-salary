@@ -12,14 +12,24 @@ const ModalAdd = () => {
   const payments = useSelector(state => state.app.payments)
   const isModal = useSelector(state => state.app.isModal)
   const currentPayment = useSelector(state => state.app.currentPayment)
+
   const isNew = (Object.keys(currentPayment).length == 0)
 
-  const [ selectedDate, setSelectedDate ] = isNew ? useState('') : useState(currentPayment.date)
-  const [ amount, onChangeInputAmount ] = isNew ? useState(0) : useState(currentPayment.sum)
-  const [ name, onChangeInputName ] = isNew ? useState('') : useState(currentPayment.name)
-  const [ isDatePickerVisible, setDatePickerVisibility ]  = useState(false)
 
+  const [selectedDate, setSelectedDate] = useState('')
+  const [amount, onChangeInputAmount] = useState(null)
+  const [name, onChangeInputName] = useState('')
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
+  console.log('test', amount, selectedDate, name)
   const payload = { amount, name, selectedDate }
+  console.log('currentPayment', currentPayment);
+
+  useEffect(() => {
+    setSelectedDate(currentPayment.date)
+    onChangeInputAmount(currentPayment.sum)
+    onChangeInputName(currentPayment.name)
+  }, [currentPayment])
+
 
   const save = async () => {
     try {
@@ -39,8 +49,9 @@ const ModalAdd = () => {
   }
 
   const onPressUpdate = () => {
-    dispatch(updatePayment(currentPayment))
-    dispatch(choiceCurrentPayment())
+    dispatch(updatePayment({ ...payload, id: currentPayment.id }))
+    console.log('payload', payload);
+    // dispatch(choiceCurrentPayment())
     clearModal()
   }
 
@@ -52,7 +63,7 @@ const ModalAdd = () => {
     onChangeInputName('')
     dispatch(isShowModal(false))
   }
-  
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -60,22 +71,21 @@ const ModalAdd = () => {
         transparent={true}
         visible={isModal}
       >
-        <View style = { styles.centeredView }>
-          <View style = { styles.modalView }>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
             <ModalAddInputs
               setDatePickerVisibility={setDatePickerVisibility}
               onChangeInputAmount={onChangeInputAmount}
               onChangeInputName={onChangeInputName}
               isDatePickerVisible={isDatePickerVisible}
-              amount={amount}
-              name={name}
-              selectedDate={selectedDate}
+              isNew={isNew}
               setSelectedDate={setSelectedDate}
+              currentPayment={currentPayment}
             />
-            <ModalButons 
-              onPressAdd = { onPressAdd }
-              isNew = { isNew }
-              onPressUpdate = { onPressUpdate }
+            <ModalButons
+              onPressAdd={onPressAdd}
+              isNew={isNew}
+              onPressUpdate={onPressUpdate}
             />
             <View style={styles.buttonClose} >
               <ButtonClose onPress={onPress} />

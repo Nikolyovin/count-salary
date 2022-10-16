@@ -8,7 +8,7 @@ const Card = ({ date, id, name, sum }) => {
     const dispatch = useDispatch()
     const payments = useSelector(state => state.app.payments)
 
-    const updatePayment = (id) => {
+    const updatePayment = () => {
         dispatch(isShowModal(true))
         dispatch(choiceCurrentPayment(id))
     }
@@ -33,21 +33,21 @@ const Card = ({ date, id, name, sum }) => {
 
     return (
         <View style={styles.conteiner} >
-            <TouchableOpacity style={styles.cardWrap} onLongPress = { updatePayment }>
+            <TouchableOpacity style={styles.cardWrap} onLongPress={updatePayment}>
                 {/* <View style={styles.cardWrap}> */}
-                    <View style={styles.textNameDateWrap}>
-                        <Text style={styles.date}>{date}</Text>
-                        <Text style={styles.name}>{name}</Text>
-                    </View>
-                    <View style={styles.cardFooter}>
+                <View style={styles.textNameDateWrap}>
+                    <Text style={styles.date}>{date}</Text>
+                    <Text style={styles.name}>{name}</Text>
+                </View>
+                <View style={styles.cardFooter}>
 
-                        <Text style={styles.sum}>{sum} р.</Text>
-                    </View>
-                    <View style={styles.button} >
-                        <ButtonClose onPress={onPress} />
-                    </View>
+                    <Text style={styles.sum}>{sum} р.</Text>
+                </View>
+                <View style={styles.button} >
+                    <ButtonClose onPress={onPress} />
+                </View>
             </TouchableOpacity>
-                {/* </View> */}
+            {/* </View> */}
         </View>
     )
 }

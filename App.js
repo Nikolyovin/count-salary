@@ -8,6 +8,7 @@ import Main from './src/components/main/Main.js';
 import { store } from './src/redux/redux-store';
 
 export default function App() {
+
   return (
     <SelectProvider>
       <Provider store={store}>

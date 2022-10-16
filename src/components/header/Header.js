@@ -11,7 +11,7 @@ const Header = () => {
   const activePayments = payments.filter(({ date }) => date.split('-')[1] == activeMonth)
 
   const salary = activePayments.reduce((sum, current) => sum + current.sum, 0)
-  
+
   for (let numMonth of MONTHRUS.keys()) {                   //для преобразования в названия месяца 
     if (numMonth == activeMonth) {
       activeMonth = MONTHRUS.get(numMonth)
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontFamily: 'Roboto-Medium',
+    // fontFamily: 'Roboto-Medium',
     fontWeight: 'bold'
   },
 
