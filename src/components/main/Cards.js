@@ -9,9 +9,9 @@ const Cards = () => {
 
   const payments = useSelector(state => state.app.payments)
   const state = useSelector(state => state)
-  // console.log('state', state);
-  // console.log('payments', payments);
+  
   const activeMonth = useSelector(state => state.app.activeMonth)
+
   const activePayments = payments.filter(({ date }) => date.split('-')[1] == activeMonth)
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Cards = () => {
       <FlatList  //FlatList нужен для скролла и заменят map 
         style={styles.cardsList}
         keyExtractor={item => item.id}
-        data={activePayments}
+        data={ activePayments.length ? activePayments : payments }
         renderItem={({ item }) =>
           <Card
             name={item.name}

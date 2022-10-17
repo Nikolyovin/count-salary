@@ -11,6 +11,7 @@ export const MONTH = {
     OCTOBER: '10',
     NOVEMBER: '11',
     DECEMBER: '12',
+    ALL: '13'
 }
 
 export const MONTHRUS = new Map([
@@ -26,4 +27,5 @@ export const MONTHRUS = new Map([
     ['10', "Октябрь"],
     ['11', "Ноябрь"],
     ['12', "Декабрь"],
+    ['13', "2022 год"],
 ])

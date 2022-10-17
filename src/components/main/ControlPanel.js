@@ -20,6 +20,7 @@ const ControlPanel = () => {
     const onPressOctouber = () => dispatch(choiceActiveMonth(MONTH.OCTOBER)) && setActiveButton(MONTH.OCTOBER)
     const onPressNovember = () => dispatch(choiceActiveMonth(MONTH.NOVEMBER)) && setActiveButton(MONTH.NOVEMBER)
     const onPressDesember = () => dispatch(choiceActiveMonth(MONTH.DECEMBER)) && setActiveButton(MONTH.DECEMBER)
+    const onPressAll = () => dispatch(choiceActiveMonth(MONTH.ALL)) && setActiveButton(MONTH.ALL)
 
     return (
         <View style={styles.controlPanel}>
@@ -59,6 +60,9 @@ const ControlPanel = () => {
                 </TouchableOpacity>
                 <TouchableOpacity style={activeButton == MONTH.DECEMBER ? styles.activeButton : styles.button} onPress={onPressDesember}>
                     <Text style={activeButton == MONTH.DECEMBER ? styles.text : null}>Декабрь</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={activeButton == MONTH.ALL ? styles.activeButton : styles.button} onPress={onPressDesember}>
+                    <Text style={activeButton == MONTH.ALL ? styles.text : null}>за 2022г</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>
