@@ -10,9 +10,9 @@ const Header = () => {
 
   const activePayments = payments.filter(({ date }) => date.split('-')[1] == activeMonth)
 
-  const salary =  activePayments.length 
-    ? activePayments.reduce((sum, current) => sum + current.sum, 0) 
-    : payments.reduce((sum, current) => sum + current.sum, 0) 
+  const salary = activePayments.length
+    ? activePayments.reduce((sum, current) => sum + current.sum, 0)
+    : payments.reduce((sum, current) => sum + current.sum, 0)
 
   for (let numMonth of MONTHRUS.keys()) {                   //для преобразования в названия месяца 
     if (numMonth == activeMonth) {

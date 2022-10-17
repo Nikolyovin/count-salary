@@ -27,11 +27,12 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    // paddingTop: 30,
+    flex: 1,
     height: '100%',
     // backgroundColor: "#05001f"
   },
   mainFooter: {
-    flex: 1
+    flex: 1,
+
   }
 })

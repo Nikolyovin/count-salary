@@ -61,7 +61,7 @@ const ControlPanel = () => {
                 <TouchableOpacity style={activeButton == MONTH.DECEMBER ? styles.activeButton : styles.button} onPress={onPressDesember}>
                     <Text style={activeButton == MONTH.DECEMBER ? styles.text : null}>Декабрь</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={activeButton == MONTH.ALL ? styles.activeButton : styles.button} onPress={onPressDesember}>
+                <TouchableOpacity style={activeButton == MONTH.ALL ? styles.activeButton : styles.button} onPress={onPressAll}>
                     <Text style={activeButton == MONTH.ALL ? styles.text : null}>за 2022г</Text>
                 </TouchableOpacity>
             </ScrollView>

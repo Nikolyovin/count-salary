@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, View, Alert } from 'react-native'
+import { StyleSheet, FlatList, View, ScrollView } from 'react-native'
 import React, { useEffect } from 'react'
 import Card from './Card.js'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,22 +8,25 @@ const Cards = () => {
   const dispatch = useDispatch()
 
   const payments = useSelector(state => state.app.payments)
-  const state = useSelector(state => state)
-  
+
   const activeMonth = useSelector(state => state.app.activeMonth)
 
-  const activePayments = payments.filter(({ date }) => date.split('-')[1] == activeMonth)
+  const activePayments = activeMonth == '13'
+    ? payments
+    : payments.filter(({ date }) => date.split('-')[1] == activeMonth)
+
 
   useEffect(() => {
     dispatch(requestPayments())
   }, [])
-
+  console.log('activePayments', activePayments)
+  console.log('payments', payments)
   return (
     <View style={styles.cardsWrap}>
       <FlatList  //FlatList нужен для скролла и заменят map 
         style={styles.cardsList}
         keyExtractor={item => item.id}
-        data={ activePayments.length ? activePayments : payments }
+        data={activePayments}
         renderItem={({ item }) =>
           <Card
             name={item.name}
@@ -33,6 +36,14 @@ const Cards = () => {
           />
         }
       />
+      {/* <ScrollView>
+        {activePayments.map(item => <Card
+          name={item.name}
+          id={item.id}
+          date={item.date}
+          sum={item.sum}
+        />)}
+      </ScrollView> */}
     </View>
   )
 }
@@ -41,11 +52,11 @@ export default Cards
 
 const styles = StyleSheet.create({
   cardsWrap: {
-    // alignItems: 'center',
-    // width: '100%'
+    flex: 1,
   },
   cardsList: {
-    // alignItems: 'center',
+    // flex: 1,
+    flexGrow: 0
 
   }
 })
