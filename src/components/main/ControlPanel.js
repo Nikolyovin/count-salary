@@ -76,6 +76,8 @@ const styles = StyleSheet.create({
         // marginHorizontal: 10,
         // borderRadius: 20,
         backgroundColor: '#eff0f5',
+        borderBottomWidth: 3,
+        borderBottomColor: '#00a8b8',
     },
     controlPanelWrap: {
         flexDirection: 'row',

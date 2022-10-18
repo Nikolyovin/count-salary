@@ -108,12 +108,11 @@ export default ModalAdd
 
 const styles = StyleSheet.create({
   centeredView: {
-    flex: 1,
-    flexGrow: 0,
-    // position: 'absolute',
+    position: 'absolute',
+    width: '100%',
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    marginTop: '60%',
     paddingHorizontal: 15,
   },
   modalView: {
