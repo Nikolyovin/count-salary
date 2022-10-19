@@ -3,7 +3,7 @@ import React from 'react'
 
 const ModalButtons = ({ onPressAdd, isNew, onPressUpdate }) => {
   return (
-    <View>
+    <View style={styles.buttonWrap}>
       {
         isNew
           ?
@@ -22,10 +22,15 @@ const ModalButtons = ({ onPressAdd, isNew, onPressUpdate }) => {
 export default ModalButtons
 
 const styles = StyleSheet.create({
+  buttonWrap: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   button: {
-    marginTop: 15,
+    marginTop: 5,
     backgroundColor: '#00a8b8',
-    width: '30%',
+    width: '40%',
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',

@@ -11,14 +11,14 @@ const Footer = () => {
     const isModal = useSelector(state => state.app.isModal)
 
     return (
-        <View style = { styles.footer }>
-            { !isModal   
-                ? <View  style = { styles.buttonWrap }>
+        <View style={styles.footer}>
+            {!isModal
+                ? <View style={styles.buttonWrap}>
                     <TouchableOpacity style={styles.buttonAdd} onPress={onPressAdd} >
                         <Text style={styles.buttonAddText}>Добавить</Text>
                     </TouchableOpacity>
-                </View>    
-                : <></>        
+                </View>
+                : <></>
             }
         </View>
     )
@@ -28,7 +28,7 @@ export default Footer
 
 const styles = StyleSheet.create({
     footer: {
-        paddingBottom: 30
+        paddingVertical: 30
     },
     buttonWrap: {
         flexDirection: 'row',

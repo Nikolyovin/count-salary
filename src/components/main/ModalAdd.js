@@ -5,6 +5,7 @@ import { addPayment, choiceCurrentPayment, isShowError, isShowModal, updatePayme
 import ModalAddInputs from './ModalAddInputs.js'
 import ButtonClose from '../common/ButtonClose'
 import ModalButons from './ModalButtons'
+import ModalError from './ModalError'
 
 const ModalAdd = () => {
   const dispatch = useDispatch()
@@ -40,20 +41,21 @@ const ModalAdd = () => {
   }, [payments])
 
   const onPressAdd = () => {
-    amount && name && selectedDate 
+    amount && name && selectedDate
       ? dispatch(addPayment({ amount, name, selectedDate })) && clearModal()
       : dispatch(isShowError(true))
   }
 
   const onPressUpdate = () => {
-    amount && name && selectedDate 
+    amount && name && selectedDate
       ? dispatch(updatePayment({ amount, name, selectedDate, id: currentPayment.id })) && clearModal() //&& dispatch(choiceCurrentPayment())
-      : dispatch(isShowError(true)) 
+      : dispatch(isShowError(true))
   }
 
   const onClose = () => {
     dispatch(isShowModal(false))
     dispatch(choiceCurrentPayment())
+    dispatch(isShowError(false))
   }
 
   const clearModal = () => {
@@ -71,7 +73,6 @@ const ModalAdd = () => {
         animationType="fade"
         transparent={true}
         visible={isModal}
-        onShow={onShow}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -117,12 +118,12 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: '100%',
-    height: 280,
+    height: 300,
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
     paddingHorizontal: 15,
-    paddingVertical: 35,
+    paddingVertical: 40,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
