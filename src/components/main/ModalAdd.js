@@ -1,7 +1,7 @@
 import { Modal, StyleSheet, View, AsyncStorage, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addPayment, choiceCurrentPayment, isShowModal, updatePayment } from '../../redux/app-reducer'
+import { addPayment, choiceCurrentPayment, isShowError, isShowModal, updatePayment } from '../../redux/app-reducer'
 import ModalAddInputs from './ModalAddInputs.js'
 import ButtonClose from '../common/ButtonClose'
 import ModalButons from './ModalButtons'
@@ -19,7 +19,7 @@ const ModalAdd = () => {
   const [amount, onChangeInputAmount] = useState(null)
   const [name, onChangeInputName] = useState('')
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
-  const payload = { amount, name, selectedDate }
+  // const payload = { amount, name, selectedDate }
 
   useEffect(() => {
     setSelectedDate(currentPayment.date)
@@ -39,15 +39,16 @@ const ModalAdd = () => {
     save()
   }, [payments])
 
-  const onPressAdd = async () => {
-    dispatch(addPayment(payload))
-    clearModal()
+  const onPressAdd = () => {
+    amount && name && selectedDate 
+      ? dispatch(addPayment({ amount, name, selectedDate })) && clearModal()
+      : dispatch(isShowError(true))
   }
 
   const onPressUpdate = () => {
-    dispatch(updatePayment({ ...payload, id: currentPayment.id }))
-    dispatch(choiceCurrentPayment())
-    clearModal()
+    amount && name && selectedDate 
+      ? dispatch(updatePayment({ amount, name, selectedDate, id: currentPayment.id })) && clearModal() //&& dispatch(choiceCurrentPayment())
+      : dispatch(isShowError(true)) 
   }
 
   const onClose = () => {
@@ -60,10 +61,8 @@ const ModalAdd = () => {
     onChangeInputAmount(0)
     onChangeInputName('')
     dispatch(isShowModal(false))
-  }
-
-  const onShow = () => {
-
+    dispatch(isShowError(false))
+    dispatch(choiceCurrentPayment())
   }
 
   return (
@@ -76,6 +75,7 @@ const ModalAdd = () => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <ModalError />
             <ModalAddInputs
               setDatePickerVisibility={setDatePickerVisibility}
               onChangeInputAmount={onChangeInputAmount}
