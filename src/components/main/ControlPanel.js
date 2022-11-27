@@ -1,13 +1,33 @@
 import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native'
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { choiceActiveMonth } from '../../redux/app-reducer'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { choiceActiveMonth, requestActiveMonth } from '../../redux/app-reducer'
 import { MONTH } from '../../helpers'
 
 const ControlPanel = () => {
     const [activeButton, setActiveButton] = useState(MONTH.JANUARY)
-
     const dispatch = useDispatch()
+
+    // const activeMonth = useSelector(state => state.app.activeMonth)
+    // //actived activeMonth 
+    // useEffect(() => {
+    //     dispatch(requestActiveMonth())
+    //     if (activeMonth) dispatch(choiceActiveMonth(activeMonth)) && setActiveButton(activeMonth)
+    // }, [])
+
+    // //added activeMonth in AsyncStorage
+    // const save = async () => {
+    //     try {
+    //         await AsyncStorage.setItem('activeMonth', JSON.stringify(activeMonth))
+    //     } catch (err) {
+    //         Alert.alert(err.message)
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     save()
+    // }, [activeMonth])
+
     const onPressJanuary = () => dispatch(choiceActiveMonth(MONTH.JANUARY)) && setActiveButton(MONTH.JANUARY)
     const onPressFebruary = () => dispatch(choiceActiveMonth(MONTH.FEBRUARY)) && setActiveButton(MONTH.FEBRUARY)
     const onPressMarch = () => dispatch(choiceActiveMonth(MONTH.MARCH)) && setActiveButton(MONTH.MARCH)
@@ -62,7 +82,7 @@ const ControlPanel = () => {
                     <Text style={activeButton == MONTH.DECEMBER ? styles.text : null}>Декабрь</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={activeButton == MONTH.ALL ? styles.activeButton : styles.button} onPress={onPressAll}>
-                    <Text style={activeButton == MONTH.ALL ? styles.text : null}>за 2022г</Text>
+                    <Text style={activeButton == MONTH.ALL ? styles.text : null}>За год</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>
@@ -73,8 +93,6 @@ export default ControlPanel
 
 const styles = StyleSheet.create({
     controlPanel: {
-        // marginHorizontal: 10,
-        // borderRadius: 20,
         backgroundColor: '#eff0f5',
         borderBottomWidth: 3,
         borderBottomColor: '#00a8b8',
@@ -83,11 +101,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-        // backgroundColor: '#eff0f5',
         height: 55,
         paddingHorizontal: 5,
-        // marginHorizontal: 10,
-        // borderRadius: 50,
     },
     text: {
         color: 'white',

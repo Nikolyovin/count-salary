@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View, AsyncStorage, Alert } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, AsyncStorage, Alert } from 'react-native'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { choiceCurrentPayment, isShowModal, removePayment } from '../../redux/app-reducer'
@@ -46,7 +46,6 @@ const Card = ({ date, id, name, sum }) => {
     return (
         <View style={styles.conteiner} >
             <TouchableOpacity style={styles.cardWrap} onLongPress={updatePayment}>
-                {/* <View style={styles.cardWrap}> */}
                 <View style={styles.textNameDateWrap}>
                     <Text style={styles.date}>{date}</Text>
                     <Text style={styles.name}>{name}</Text>
@@ -59,7 +58,6 @@ const Card = ({ date, id, name, sum }) => {
                     <ButtonClose onClose={onClose} />
                 </View>
             </TouchableOpacity>
-            {/* </View> */}
         </View>
     )
 }
@@ -80,7 +78,6 @@ const styles = StyleSheet.create({
 
     },
     textNameDateWrap: {
-        // alignItems: 'center',
         flex: 1,
     },
     date: {

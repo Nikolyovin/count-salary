@@ -8,12 +8,12 @@ const Cards = () => {
   const dispatch = useDispatch()
 
   const payments = useSelector(state => state.app.payments)
-
+  console.log('payments', payments);
   const activeMonth = useSelector(state => state.app.activeMonth)
 
   const activePayments = activeMonth == '13'
     ? payments
-    : payments.filter(({ date }) => date.split('-')[1] == activeMonth)
+    : payments?.filter(({ date }) => date.split('-')[1] == activeMonth) || []
 
 
   useEffect(() => {
@@ -36,14 +36,6 @@ const Cards = () => {
           />
         }
       />
-      {/* <ScrollView>
-        {activePayments.map(item => <Card
-          name={item.name}
-          id={item.id}
-          date={item.date}
-          sum={item.sum}
-        />)}
-      </ScrollView> */}
     </View>
   )
 }
@@ -55,8 +47,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cardsList: {
-    // flex: 1,
     flexGrow: 0
-
   }
 })

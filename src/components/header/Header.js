@@ -1,4 +1,4 @@
-import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
+import { ImageBackground, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import img from '../../../assets/background.jpg'
@@ -8,11 +8,11 @@ const Header = () => {
   const payments = useSelector(state => state.app.payments)
   let activeMonth = useSelector(state => state.app.activeMonth)
 
-  const activePayments = payments.filter(({ date }) => date.split('-')[1] == activeMonth)
+  const activePayments = activeMonth == '13'
+    ? payments
+    : payments.filter(({ date }) => date.split('-')[1] == activeMonth)
 
-  const salary = activePayments.length
-    ? activePayments.reduce((sum, current) => sum + current.sum, 0)
-    : payments.reduce((sum, current) => sum + current.sum, 0)
+  const salary = activePayments.reduce((sum, current) => sum + current.sum, 0)
 
   for (let numMonth of MONTHRUS.keys()) {                   //для преобразования в названия месяца 
     if (numMonth == activeMonth) {
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    // fontFamily: 'Roboto-Medium',
+    // fontFamily: 'Open Sans',
     fontWeight: 'bold'
   },
 

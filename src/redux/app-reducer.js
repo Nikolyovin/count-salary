@@ -8,6 +8,7 @@ const SET_PAYMENTS = 'SET_PAYMENTS'
 const CHOICE_CURRENT_PAYMENT = 'CHOICE_CURRENT_PAYMENT'
 const UPDATE_PAYMENT = 'UPDATE_PAYMENT'
 const IS_EMPTY_FIELD = 'IS_EMPTY_INPUT'
+// const SET_ACTIVE_MONTH = 'SET_ACTIVE_MONTH'
 
 const initialState = {
     isModal: false,
@@ -52,6 +53,12 @@ const appReducer = (state = initialState, action) => {
                 payments: action.payments
             }
 
+        // case SET_ACTIVE_MONTH:
+        //     return {
+        //         ...state,
+        //         activeMonth: action.activeMonth
+        //     }
+
         case CHOICE_CURRENT_PAYMENT:
             const currentPayment = action.paymentId
                 ? state.payments.find(({ id }) => id == action.paymentId)
@@ -81,6 +88,7 @@ const appReducer = (state = initialState, action) => {
 }
 
 export const setPayments = (payments) => ({ type: SET_PAYMENTS, payments })
+// export const setActiveMonth = (activeMonth) => ({ type: SET_ACTIVE_MONTH, activeMonth })
 export const isShowModal = (isModal) => ({ type: IS_SHOW_MODAL, isModal })
 export const removePayment = (paymentId) => ({ type: DELETE_PAYMENT, paymentId })
 export const addPayment = (payload) => ({ type: ADD_PAYMENT, payload })
@@ -97,5 +105,14 @@ export const requestPayments = () => async (dispatch) => {
         console.log(e)
     }
 }
+
+// export const requestActiveMonth = () => async (dispatch) => {
+//     try {
+//         const activeMonth = await AsyncStorage.getItem('activeMonth') || ''
+//         dispatch(setActiveMonth(JSON.parse(activeMonth)))
+//     } catch (e) {
+//         console.log(e)
+//     }
+// }
 
 export default appReducer

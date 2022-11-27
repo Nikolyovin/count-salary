@@ -23,7 +23,9 @@
     "react-native-web": "~0.18.7",
     "react-redux": "^8.0.4",
     "redux": "^4.2.0",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "expo-font": "~10.2.0",
+    "expo-updates": "~0.14.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
